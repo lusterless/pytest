@@ -39,7 +39,7 @@ pipeline {
                 stage('Headless Browser Test') {
                     agent {
                         docker { 
-                            image 'image 'python:3.7.2'
+                            image 'python:3.7.2'
                             args '--name uitest --network testing'
                         }
                     }
