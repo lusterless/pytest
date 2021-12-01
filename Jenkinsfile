@@ -57,6 +57,7 @@ pipeline {
                     }
                     steps {
                         sh 'nohup flask run & sleep 1'
+                        input message: 'Finished using the web site? (Click "Proceed" to continue)'
                     }
                 }
                 stage('Headless Browser Test') {
@@ -67,9 +68,7 @@ pipeline {
                         }
                     }
                     steps {
-                        //sh 'pytest -s -rA --junitxml=test-report.xml'
-                        
-                        input message: 'Finished using the web site? (Click "Proceed" to continue)'                 
+                        sh 'pytest -s -rA --junitxml=test-report.xml'
                     }
                     post {
                         always {
