@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 set -x
-docker run -d -p 5000:5000 --name apptest --network testing theimg:latest
+sudo docker run -d -p 5000:5000 --name apptest --network testing theimg:latest
 sleep 1
 set +x
 
