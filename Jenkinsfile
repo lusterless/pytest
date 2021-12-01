@@ -21,30 +21,6 @@ pipeline {
                 sh 'docker build -t theimg:latest .'
             }
         }
-        /* OWASP Dependency Check */
-        stage('OWASP-DC') {
-            agent { 
-                docker {
-                    image 'theimg:latest'
-                }
-            }
-            steps {
-                dependencyCheck additionalArguments: '--format HTML --format XML', odcInstallation: 'OWASP-DC'
-                
-                // --suppression suppression.xml  // suppress warnings xml 
-                // --enableExperimental // to test on python files
-                // --log odc.log // generate log file
-            }
-            post {
-                always {
-                    dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-                    // untested codes of x08 below, do not uncomment unless you know what u doing. 
-                    // recordIssues enabledForFailure: true, tool: analysisParser(pattern: "dependency-check-report.xml", id: "owasp-dependency-check")
-                    // recordIssues enabledForFailure: true, tool: pyLint(pattern: 'pylint.log')
-                
-                }
-            }
-        }
         /* Selenium portion */
         stage('unit/sel test') {
             parallel {
