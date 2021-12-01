@@ -32,7 +32,7 @@ pipeline {
                 stage('Deploy') {
                     agent any
                     steps {
-			sh './deploy.sh'
+			sh 'docker run -d -p 5000:5000 --name apptest --network testing theimg:latest'
                         input message: 'Finished using the web site? (Click "Proceed" to continue)'
                     }
                 }
