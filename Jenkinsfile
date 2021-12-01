@@ -25,13 +25,9 @@ pipeline {
         stage('unit/sel test') {
             parallel {
                 stage('Deploy') {
-                    agent {
-                        docker { 
-                            image 'theimg:latest' 
-                            args '--name apptest --network testing'
-                        }
-                    }
+                    agent any
                     steps {
+			sh './deploy.sh'
                         input message: 'Finished using the web site? (Click "Proceed" to continue)'
                     }
                 }
