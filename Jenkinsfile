@@ -34,6 +34,7 @@ pipeline {
                     steps {
 			sh 'docker run -d -p 5000:5000 --name apptest --network testing theimg:latest'
                         input message: 'Finished using the web site? (Click "Proceed" to continue)'
+			sh 'docker container stop apptest'
                     }
                 }
                 stage('Headless Browser Test') {
