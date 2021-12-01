@@ -44,16 +44,7 @@ pipeline {
                         }
                     }
                     steps {
-                        sh """
-                        pip install pytest
                         input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                        pytest -s -rA --junitxml=test-report.xml
-                        """
-                    }
-                    post {
-                        always {
-                            junit testResults: 'test-report.xml'
-                        }
                     }
                 }
             }
