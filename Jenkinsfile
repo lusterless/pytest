@@ -44,8 +44,13 @@ pipeline {
 			}
 		    }
                     steps {
-                        input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                        sh 'pytest -rA --junitxml=logs/uireport.xml'	
                     }
+		    post {
+			always {
+				junit testResults: 'logs/uireport.xml'
+			}
+		    }
                 }
             }
         }
