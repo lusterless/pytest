@@ -23,7 +23,7 @@ pipeline {
                     catch (Exception e) { echo "no unused containers deleted" }
                 }
                 // ensure latest image is being build
-                //sh 'docker build -t theimg:latest .'
+                sh 'docker build -t theimg:latest .'
             }
         }
         /* Selenium portion */
