@@ -56,13 +56,7 @@ pipeline {
                         }
                     }
                     steps {
-                        script {
-                            try {sh 'yes | docker stop thecon'}
-                            catch (Exception e) {echo "no container to stop"}
-
-                            try {sh 'yes | docker rm thecon'}
-                            catch (Exception e) {echo "no container to remove"}
-                        }
+                        sh 'nohup flask run & sleep 1'
                     }
                 }
                 stage('Headless Browser Test') {
@@ -73,25 +67,9 @@ pipeline {
                         }
                     }
                     steps {
-                        sh 'nohup flask run & sleep 1'
-                        sh 'pytest -s -rA --junitxml=test-report.xml'
+                        //sh 'pytest -s -rA --junitxml=test-report.xml'
                         
-                        input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                        
-                        script {
-                            // def scannerHome = tool 'SonarQube';
-                            // withSonarQubeEnv('SonarQube') {
-                            //     sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=test -Dsonar.sources=."
-                            // }
-                            try {sh 'pkill -f flask'}
-                            catch (Exception e) {echo "no process to kill"}
-
-                            try {sh 'yes | docker stop thecon'}
-                            catch (Exception e) {echo "no container to stop"}
-
-                            try {sh 'yes | docker rm thecon'}
-                            catch (Exception e) {echo "no container to remove"}
-                        }
+                        input message: 'Finished using the web site? (Click "Proceed" to continue)'                 
                     }
                     post {
                         always {
