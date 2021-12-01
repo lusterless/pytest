@@ -32,15 +32,14 @@ pipeline {
                         }
                     }
                     steps {
-                        sh 'nohup flask run & sleep 1'
                         input message: 'Finished using the web site? (Click "Proceed" to continue)'
                     }
                 }
                 stage('Headless Browser Test') {
                     agent {
                         docker { 
-                            image 'theimg:latest'
-                            args '--name uitest --network testing'
+							image 'maven:3-alpine' 
+							args '-v /root/.m2:/root/.m2' 
                         }
                     }
                     steps {
