@@ -59,28 +59,28 @@ pipeline {
         /* Warnings X08 is not well done, pls refer to notes for doc
         it is too dynamic
         */ 
-        // stage('warnings') {
+         stage('warnings') {
             
-        //     agent {
-        //         docker { image 'theimg:latest' }
-        //     }
-        //     steps {
-        //         sh 'nohup flask run & sleep 1'
-        //         sh 'pytest -s -rA --junitxml=warn-report.xml'
-        //         echo "hello"
+             agent {
+                 docker { image 'theimg:latest' }
+             }
+             steps {
+                 sh 'nohup flask run & sleep 1'
+                 sh 'pytest -s -rA --junitxml=warn-report.xml'
+                 echo "hello"
 
-        //     }
-        //     post {
-        //         always {
+             }
+             post {
+                 always {
                     
-        //             // recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
-                
-        //             recordIssues enabledForFailure: true, tool: codeAnalysis()	
-        //             recordIssues enabledForFailure: true, tool: codeChecker()
-        //             recordIssues enabledForFailure: true, tool: dockerLint()
-        //         }
-        //     }
-        // }
+                     recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
+              
+                     recordIssues enabledForFailure: true, tool: codeAnalysis()	
+                     recordIssues enabledForFailure: true, tool: codeChecker()
+                     recordIssues enabledForFailure: true, tool: dockerLint()
+                 }
+             }
+         }
 
         /* X09 SonarQube */ 
         stage('SonarQube') {
@@ -91,7 +91,7 @@ pipeline {
                 script {
                     def scannerHome = tool 'SonarQube';
                     withSonarQubeEnv('SonarQube') {
-                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=4597949456092819ce6b273a03af4010625d931e -Dsonar.sources=."
+                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=project:test -Dsonar.sources=."
                     }
                 }
             }
