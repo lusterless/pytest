@@ -70,7 +70,7 @@ pipeline {
                 script {
                     def scannerHome = tool 'SonarQube';
                     withSonarQubeEnv('SonarQube') {
-                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=project:test -Dsonar.sources=."
+                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=project:test -Dsonar.sources=. -Dsonar.analysis.mode=preview -Dsonar.report.export.path=sonar-report.json"
                     }
                 }
             }
