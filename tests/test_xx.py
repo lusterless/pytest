@@ -31,7 +31,7 @@ def test_http(browser):
     PLACEHOLDER / TO BE DELETED
     """
     wait = WebDriverWait(browser, 10)
-    browser.get("http://127.0.0.1:5000")
+    browser.get("http://apptest:5000")
 #     wait.until(EC.title_is("127.0.0.1:5000"))
 
     # check for https connection
@@ -41,7 +41,7 @@ def test_http(browser):
 # def test_https(browser):
 #     # setup
 #     wait = WebDriverWait(browser, 10)
-#     browser.get("https://127.0.0.1")
+#     browser.get("http://apptest:5000")
 #     wait.until(EC.title_is("Home - BAGATEA"))
 #     wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".btn")))
 #     verify = browser.find_element(By.CSS_SELECTOR, ".btn")
@@ -54,7 +54,7 @@ def test_http(browser):
 # def test_otp_bruteforce(browser):
 #     # setup
 #     wait = WebDriverWait(browser, 10)
-#     browser.get("http://localhost:5000/en/account/login")
+#     browser.get("http://apptest:5000/en/account/login")
 #     browser.implicitly_wait(3)
 #     wait.until(EC.presence_of_element_located((By.ID, "email")))
 #     wait.until(EC.presence_of_element_located((By.ID, "password")))
