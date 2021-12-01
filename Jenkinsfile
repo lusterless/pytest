@@ -1,5 +1,5 @@
 pipeline {
-    agent {dockerfile true}
+    agent any
     environment {
         // CI set to true to allow it to run in "non-watch" (i.e. non-interactive) mode
         CI = 'true'
@@ -8,7 +8,12 @@ pipeline {
     }
     stages {
         stage('Build') { 
-            steps {
+	    agent {
+	    	docker {
+			image 'python:3.7.2' 
+		}
+	    }
+	    steps {
                 script {
                     try { sh 'yes | docker image prune' }
                     catch (Exception e) { echo "no dangling images deleted" }
