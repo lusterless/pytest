@@ -63,12 +63,16 @@ pipeline {
                 stage('Headless Browser Test') {
                     agent {
                         docker { 
-                            image 'theimg:latest' 
+                            image 'image 'python:3.7.2' ' 
                             args '--name uitest --network testing'
                         }
                     }
                     steps {
-                        sh 'pytest -s -rA --junitxml=test-report.xml'
+                        sh """
+                        pip install pytest
+                        input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                        pytest -s -rA --junitxml=test-report.xml
+                        """
                     }
                     post {
                         always {
