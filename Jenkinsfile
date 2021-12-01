@@ -38,11 +38,11 @@ pipeline {
                 }
                 stage('Headless Browser Test') {
                     agent {
-                        docker { 
-				image 'maven:3-alpine' 
-				args '-v /root/.m2:/root/.m2 --name uitest --network testing' 
-                        }
-                    }
+			docker {
+				image 'theimg:latest'
+				args '--name uitest --network testing'
+			}
+		    }
                     steps {
                         input message: 'Finished using the web site? (Click "Proceed" to continue)'
                     }
